@@ -1,0 +1,78 @@
+
+
+
+from accounts.models import *
+from news.models import *
+John = User.objects.create(username = "John",password = "watafak")
+Don = User.objects.create(username = "Don",password = "watafak")
+Misha = User.objects.create(username = "Misha",password = "watafak")
+
+Author_John = Author.objects.create(author = John,author_rate = 0)
+Author_Don = Author.objects.create(author = Don,author_rate = 0)
+
+sports = Category.objects.create(category = "Sports")
+military = Category.objects.create(category = "Military")
+health = Category.objects.create(category = "Health")
+dayly = Category.objects.create(category = "Dayly")
+
+war_news = Post.objects.create(post_author = Author_John,kind_of_post = "NW",header = "Some text",main_text = "Some text")
+good_morning = Post.objects.create(post_author = Author_Don,kind_of_post = "AR",header = "Some text",main_text = "Some text")
+about_sports = Post.objects.create(post_author = Author_Don,kind_of_post = "AR",header = "Some text",main_text = "Some text")
+
+military_post = PostCategory.objects.create(post = war_news,category = military)
+dayly_post = PostCategory.objects.create(post = good_morning,category = dayly)
+sports_post = PostCategory.objects.create(post = about_sports,category = sports)
+sports_is_healthy = PostCategory.objects.create(post = about_sports,category = health)
+
+angry_comment = Comment.objects.create(post = war_news,user = John,comment_text = "fdf")
+nice_comment = Comment.objects.create(post = good_morning,user = Misha,comment_text = "fdf")
+good_comment = Comment.objects.create(post = good_morning,user = Misha,comment_text = "хахаххахахаххахахаххахахха")
+simple_comment = Comment.objects.create(post = about_sports,user = Misha,comment_text = "fdf")
+haha_comment = Comment.objects.create(post = about_sports,user = Don,comment_text = "fdf")
+haha_comment.like()
+simple_comment.like()
+simple_comment.like()
+simple_comment.dislike()
+nice_comment.like()
+nice_comment.like()
+nice_comment.like()
+nice_comment.like()
+angry_comment.dislike()
+angry_comment.dislike()
+angry_comment.dislike()
+angry_comment.dislike()
+angry_comment.dislike()
+angry_comment.dislike()
+angry_comment.dislike()
+
+war_news.dislike()
+good_morning.like()
+good_morning.like()
+good_morning.like()
+good_morning.like()
+good_morning.like()
+good_morning.like()
+good_morning.like()
+about_sports.like()
+
+Author.update_rating(Author_John)
+Author.update_rating(Author_Don)
+Best_Author = Author.objects.all().order_by('-author_rate').first()
+name = Best_Author.author.username
+rate = Best_Author.author_rate
+Best_Author = {name:rate}
+Best_Author
+
+Best_Post = Post.objects.all().order_by('-post_rate').first()
+bpdate = Best_Post.created_at
+bpauthor = Best_Post.post_author.author.username
+bprate = Best_Post.post_rate
+bpheader = Best_Post.header
+bppreview = Post.preview(Best_Post)
+bpinfo = (bpauthor,bprate,bpheader,bppreview,bpdate)
+bpinfo
+
+bpcomments = Comment.objects.filter(post = Best_Post)
+bpcomments.values('user','comment_rate','comment_text','comment_created_at')
+
+
