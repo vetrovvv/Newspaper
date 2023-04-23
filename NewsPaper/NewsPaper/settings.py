@@ -25,12 +25,16 @@ SECRET_KEY = 'django-insecure-*0frcux$cf$@sm9ub&#kz9pqvy%98wel8*eyy=w#)*a-c56ac)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+SITE_ID=1
+
 ALLOWED_HOSTS = []
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'django.contrib.flatpages',
+    'django.contrib.sites',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

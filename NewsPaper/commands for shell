@@ -1,7 +1,4 @@
 
-
-
-from accounts.models import *
 from news.models import *
 John = User.objects.create(username = "John",password = "watafak")
 Don = User.objects.create(username = "Don",password = "watafak")
