@@ -17,8 +17,12 @@ def getCommentsRateOfAuthorPosts():
 
 
 class Author(models.Model):
-    author = models.OneToOneField(User, on_delete=models.CASCADE)
+    author = models.OneToOneField(User,on_delete=models.CASCADE)
     author_rate = models.IntegerField(null = True, blank=True)
+
+
+    def __str__(self):
+        return self.author.username
 
 
 
@@ -38,8 +42,7 @@ class Author(models.Model):
         self.author_rate = final_rate
         self.save()
 
-    def __str__(self):
-        return f'{self.category.title()}'
+
 class Category(models.Model):
     category = models.CharField(max_length = 200,unique=True)
 
@@ -56,6 +59,7 @@ class Post(models.Model):
     post_author = models.ForeignKey(Author, on_delete=models.CASCADE,related_name='author_posts')
     kind_of_post = models.CharField(max_length=2,choices=CHOICES)
     created_at = models.DateTimeField(auto_now_add=True)
+    created_at_date = models.DateField(auto_now_add=True)
     header = models.CharField(default="",max_length=64)
     main_text = models.TextField(default="")
     post_rate = models.IntegerField(default=0)
@@ -67,6 +71,8 @@ class Post(models.Model):
         time = self.created_at.strftime("%d:%m:%Y:%H:%M")
         return f'Автор {l}:={self.header.title()}{self.main_text}{time}'
 
+    def get_absolute_url(self):
+        return f'/news/{self.id}'
 
 
     def preview(self):
@@ -85,8 +91,6 @@ class PostCategory(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE,related_name="post_categories")
     category = models.ForeignKey(Category, on_delete=models.CASCADE,related_name="categories_of_posts")
 
-    def __str__(self):
-        return f'{self.category.title()}'
 
 class Comment(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE,related_name='post_comments')

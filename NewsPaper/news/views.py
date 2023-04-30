@@ -1,19 +1,85 @@
 from django.shortcuts import render
-from django.views.generic import \
-    ListView, DetailView,TemplateView # импортируем класс, который говорит нам о том, что в этом представлении мы будем выводить список объектов из БД
-from .models import Post,Author,Category,PostCategory
+from django.views.generic import  DetailView,ListView,View,CreateView,UpdateView,DeleteView
+from django_filters.views import FilterView
+from .models import Post,PostCategory,Category,Author
 from datetime import datetime
 from django.contrib.auth.models import User
+from django.core.paginator import Paginator
+from .filters import PostFilter
+from django_filters.views import BaseFilterView
+from .forms import PostForm
+from django.contrib.redirects.models import Redirect
+from django.shortcuts import redirect
+
+
 
 
 class PostList(ListView):
+
     model = Post
-    template_name = 'posts.html'
     context_object_name = 'posts'
-    queryset = Post.objects.order_by('-created_at').values()
+    ordering = ['-created_at_date']
+    template_name = 'posts.html'
+    paginate_by = 10
+
+
+    def get_queryset(self):
+        queryset = PostFilter(self.request.GET,super().get_queryset()).qs
+        return queryset
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['filter'] = PostFilter(self.request.GET, queryset=self.get_queryset().filter(id = 1))
+        context['form'] = PostForm()
+        return context
 
 
 
+class AddPost(CreateView):
+    model = Post
+    template_name = 'add.html'
+    form_class = PostForm
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['form'] = PostForm()
+        return context
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(request.POST)  # создаём новую форму, забиваем в неё данные из POST-запроса
+
+        if form.is_valid():
+            obj = form.save(commit=False)
+            obj.post_author = Author.objects.get(author = request.user.id)
+            form.save()
+
+        return redirect('/news')
+
+class Search(ListView):
+    model = Post
+    context_object_name = 'posts'
+    template_name = 'search.html'
+    ordering = ['-created_at_date']
+    paginate_by = 10
+
+class PostUpdateView(UpdateView):
+    model = Post
+    template_name = 'post_update.html'
+    form_class = PostForm
+
+    def get_object(self, **kwargs):
+        id = self.kwargs.get('pk')
+        return Post.objects.get(pk=id)
+
+class PostDeleteView(DeleteView):
+    template_name = 'post_delete.html'
+    queryset = Post.objects.all()
+    success_url = '/news/'
+
+    def get_queryset(self):
+        queryset = PostFilter(self.request.GET,super().get_queryset()).qs
+        return queryset
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['filter'] = PostFilter(self.request.GET, queryset=self.get_queryset().filter(id = 1))
+        return context
 
 class PostDetail(DetailView):
     model = Post
@@ -24,7 +90,7 @@ class PostDetail(DetailView):
         self.object = self.get_object()
         context = super().get_context_data(**kwargs)
         context[
-            'value1'] = self.object.post_author.author.username
+            'value1'] = self.object.post_author
         return context
 
 

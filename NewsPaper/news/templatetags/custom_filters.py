@@ -1,9 +1,8 @@
 from django import template
 from django.template.defaultfilters import stringfilter
 register = template.Library()
+from news.models import *
 censor_list = []
-
-
 
 
 
@@ -17,6 +16,7 @@ censor_words.close()
 @register.filter
 @stringfilter
 def censor(value):
+
     value1 = value.lower()
     for word in censor_list:
         if word in value1:
@@ -33,6 +33,11 @@ def censor(value):
         if id in uppercase_index_list_uniq:
             list_of_value1[id] = sym.upper()
             value = "".join(list_of_value1)
-            return value
+    return value
+
+@register.filter
+def author(value):
+    m = Author.objects.get(id = value)
+    return m
 
 
