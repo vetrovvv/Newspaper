@@ -1,5 +1,5 @@
 from django_filters import FilterSet,DateFilter  # импортируем filterset, чем-то напоминающий знакомые дженерики
-from .models import Post
+from .models import Post,Author,User
 from datetime import datetime, timedelta
 
 

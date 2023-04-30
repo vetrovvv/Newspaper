@@ -26,11 +26,6 @@ class PostList(ListView):
     def get_queryset(self):
         queryset = PostFilter(self.request.GET,super().get_queryset()).qs
         return queryset
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['filter'] = PostFilter(self.request.GET, queryset=self.get_queryset().filter(id = 1))
-        context['form'] = PostForm()
-        return context
 
 
 
@@ -59,6 +54,11 @@ class Search(ListView):
     ordering = ['-created_at_date']
     paginate_by = 10
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['filter'] = PostFilter(self.request.GET, queryset=self.get_queryset())
+        return context
+
 class PostUpdateView(UpdateView):
     model = Post
     template_name = 'post_update.html'
@@ -76,10 +76,7 @@ class PostDeleteView(DeleteView):
     def get_queryset(self):
         queryset = PostFilter(self.request.GET,super().get_queryset()).qs
         return queryset
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['filter'] = PostFilter(self.request.GET, queryset=self.get_queryset().filter(id = 1))
-        return context
+
 
 class PostDetail(DetailView):
     model = Post
