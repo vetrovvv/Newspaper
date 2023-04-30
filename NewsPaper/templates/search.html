@@ -12,12 +12,8 @@ News
 <h3>{{ time_now|date:'M d Y' }}</h3>
 <hr>
 <form method="GET">
-	     {% for i in filter.qs %}
-
-	     {{ filter.form }}
-	     {% endfor %}
-
-            <input type="submit" value="Найти">
+	{{ filter.form }}
+	<input type="submit" value="Найти">
 </form>
 
 <table>
@@ -38,7 +34,7 @@ News
 		Превью
 		</td>
 	</thead>
-{% for post in posts %}
+{% for post in filter.qs %}
 <tr>    <td>
 	{{post.get_kind_of_post_display}}
         </td>
