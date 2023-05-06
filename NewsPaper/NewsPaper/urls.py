@@ -21,7 +21,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('news/', include ('news.urls')),
     path('accounts/', include('allauth.urls'),name='signup'),
-    path('news/logout/',
+    path('logout/',
          LogoutView.as_view(template_name='registration/logout.html'),
          name='logout'),
 ]
