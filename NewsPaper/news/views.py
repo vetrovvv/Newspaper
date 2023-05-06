@@ -1,25 +1,22 @@
-from django.shortcuts import render
-from django.views.generic import  DetailView,ListView,View,CreateView,UpdateView,DeleteView
-from django_filters.views import FilterView
-from .models import Post,PostCategory,Category,Author
-from datetime import datetime
-from django.contrib.auth.models import User
-from django.core.paginator import Paginator
+
+from django.views.generic import  DetailView,ListView,CreateView,UpdateView,DeleteView
 from .filters import PostFilter
-from django_filters.views import BaseFilterView
 from .forms import PostForm
-from django.contrib.redirects.models import Redirect
+from django.contrib.auth.mixins import LoginRequiredMixin,PermissionRequiredMixin
+from django.views.generic import TemplateView
 from django.shortcuts import redirect
-
-
-
+from django.contrib.auth.models import Group
+from django.contrib.auth.decorators import login_required
+from .models import *
+from django.contrib.auth.models import User
+from django.shortcuts import redirect
 
 class PostList(ListView):
 
     model = Post
     context_object_name = 'posts'
     ordering = ['-created_at_date']
-    template_name = 'posts.html'
+    template_name = 'news/posts.html'
     paginate_by = 10
 
 
@@ -29,9 +26,11 @@ class PostList(ListView):
 
 
 
-class AddPost(CreateView):
+class AddPost(LoginRequiredMixin,PermissionRequiredMixin,CreateView):
+    permission_required = ('news.add_post',
+                           )
     model = Post
-    template_name = 'add.html'
+    template_name = 'news/add.html'
     form_class = PostForm
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -50,7 +49,7 @@ class AddPost(CreateView):
 class Search(ListView):
     model = Post
     context_object_name = 'posts'
-    template_name = 'search.html'
+    template_name = 'news/search.html'
     ordering = ['-created_at_date']
     paginate_by = 10
 
@@ -59,17 +58,21 @@ class Search(ListView):
         context['filter'] = PostFilter(self.request.GET, queryset=self.get_queryset())
         return context
 
-class PostUpdateView(UpdateView):
+class PostUpdateView(LoginRequiredMixin,PermissionRequiredMixin,UpdateView):
+    permission_required = ('news.change_post',
+                           )
     model = Post
-    template_name = 'post_update.html'
+    template_name = 'news/post_update.html'
     form_class = PostForm
 
     def get_object(self, **kwargs):
         id = self.kwargs.get('pk')
         return Post.objects.get(pk=id)
 
-class PostDeleteView(DeleteView):
-    template_name = 'post_delete.html'
+class PostDeleteView(LoginRequiredMixin,PermissionRequiredMixin,DeleteView):
+    permission_required = ('news.delete_post',
+                           )
+    template_name = 'news/post_delete.html'
     queryset = Post.objects.all()
     success_url = '/news/'
 
@@ -80,7 +83,7 @@ class PostDeleteView(DeleteView):
 
 class PostDetail(DetailView):
     model = Post
-    template_name = 'post.html'
+    template_name = 'news/post.html'
     context_object_name = 'post'
 
     def get_context_data(self,*, object_list=None,**kwargs):
@@ -91,3 +94,25 @@ class PostDetail(DetailView):
         return context
 
 
+class IndexView(LoginRequiredMixin, TemplateView):
+    template_name = 'news/posts.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['is_not_author'] = not self.request.user.groups.filter(name='Authors').exists()
+        return context
+
+
+@login_required
+def become_author(request):
+    user = request.user
+    author_group = Group.objects.get(name='Authors')
+    if not request.user.groups.filter(name='Authors').exists():
+        author_group.user_set.add(user)
+        Author.objects.create(author=request.user,author_rate=0)
+    return redirect("/news/")
+
+
+def redirect_view(request):
+    response = redirect('http://127.0.0.1:8000/accounts/login/')
+    return response

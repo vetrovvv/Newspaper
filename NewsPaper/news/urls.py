@@ -1,5 +1,6 @@
 from django.urls import path
-from .views import PostList, PostDetail,Search,AddPost,PostUpdateView,PostDeleteView
+from .views import PostList, PostDetail,Search,AddPost,PostUpdateView,PostDeleteView,become_author,redirect_view
+from django.contrib.auth.views import LoginView, LogoutView
 
 urlpatterns = [
     # path — означает путь. В данном случае путь ко всем товарам у нас останется пустым, позже станет ясно почему
@@ -9,4 +10,6 @@ urlpatterns = [
     path('add/', AddPost.as_view(),name='add'),
     path('<int:pk>/edit/',PostUpdateView.as_view(),name='edit'),
     path('<int:pk>/delete/',PostDeleteView.as_view(),name='delete'),
+    path('become_author/',become_author,name = "become_author"),
+    path('login/',redirect_view,name='login')
 ]
