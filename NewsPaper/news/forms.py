@@ -1,7 +1,8 @@
 from django.forms import ModelForm,TextInput
-from .models import Post
+from .models import Post,PostCategory,Category
 from allauth.account.forms import SignupForm
 from django.contrib.auth.models import Group
+# from django.db import models
 
 
 
@@ -26,3 +27,10 @@ class BasicSignupForm(SignupForm):
         Users_group = Group.objects.get(name='Users')
         Users_group.user_set.add(user)
         return user
+
+class SubscribeCategoryForm(ModelForm):
+    class Meta:
+        model = PostCategory
+        fields = ['category']
+
+

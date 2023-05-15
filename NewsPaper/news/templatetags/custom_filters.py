@@ -40,4 +40,10 @@ def author(value):
     m = Author.objects.get(id = value)
     return m
 
+@register.filter
+def category_name(value):
+    if '=' in value:
+        part1,part2 = value.split('=')
+        return Category.objects.get(id=part2)
+
 

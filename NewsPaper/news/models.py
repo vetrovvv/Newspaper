@@ -4,8 +4,9 @@ from django.utils import timezone
 today = timezone.now
 from django.db.models import Sum
 from datetime import *
-
-
+from django.db.models.signals import (
+post_save
+)
 saver = []   # List of dictionaries that gets the rating of all comments on the author's posts and is cleared when getCommentsOfAuthorPosts completes
 try:
     del saver[0]
@@ -16,6 +17,9 @@ def getCommentsRateOfAuthorPosts():
             return e.get('comment_rate__sum')
 
 
+
+
+
 class Author(models.Model):
     author = models.OneToOneField(User,on_delete=models.CASCADE)
     author_rate = models.IntegerField(null = True, blank=True)
@@ -23,6 +27,7 @@ class Author(models.Model):
 
     def __str__(self):
         return self.author.username
+
 
 
 
@@ -43,11 +48,12 @@ class Author(models.Model):
         self.save()
 
 
+
 class Category(models.Model):
     category = models.CharField(max_length = 200,unique=True)
-
+    subscribers = models.ManyToManyField(User,related_name="subscribing_categories",blank=True)
     def __str__(self):
-        return f'{self.category.title()}'
+        return self.category.title()
 
 class Post(models.Model):
     article = 'AR'
@@ -73,6 +79,9 @@ class Post(models.Model):
 
     def get_absolute_url(self):
         return f'/news/{self.id}'
+
+    def get_self_categories(self):
+        return list(self.category.all())
 
 
     def preview(self):
@@ -107,5 +116,6 @@ class Comment(models.Model):
     def dislike(self):
         self.comment_rate -= 1
         self.save()
+
 
 

@@ -13,3 +13,11 @@ class PostFilter(FilterSet):
                   'post_rate':['gte'],
                   'post_author_id': ['exact'],
                  }
+
+class CategFilter(FilterSet):
+    # Здесь в мета классе надо предоставить модель и указать поля, по которым будет фильтроваться (т.е. подбираться) информация о товарах
+    class Meta:
+        model = Post
+        fields = {
+                  'category': ['exact'],
+                 }

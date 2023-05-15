@@ -15,6 +15,7 @@ News
 
 <button> <a href="{% url 'become_author' %}"> Стать автором!</a> </button>
 
+
 <table>
 	<thead> <td>
 		Вид поста
@@ -68,5 +69,10 @@ News
         <a href="?page={{ page_obj.paginator.num_pages }}">Last</a>
     {% endif %}
 {% endif %}
+<form method="POST" action="{% url 'become_subscriber' %}">
+    {% csrf_token %} 
+    {{ form }} <!-- Теперь нам нужна только готовая форма и кнопка -->
+    <input type="submit" name="categ" value="Подписаться на категорию постов">
+</form>
     
 {% endblock content %}

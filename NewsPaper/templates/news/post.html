@@ -21,5 +21,19 @@
 <a href="{% url 'edit' post.id %}"><button>Редактировать</button></a>
 <a href="{% url 'delete' post.id %}"><button>Удалить пост</button></a>
 <a href="{% url 'news' %}"><button>Назад к постам</button></a>
+<hr>
 
-{% endblock content %}
+<form action="become_subscriber_detail/" method="POST">
+{% csrf_token %} 
+{% for category in post.category.filter %}
+    <label for="category_of_post">Категория: {{ category }}</label>
+    <input id="category_of_post" type="checkbox" name="category" value="{{ category }}">
+{% endfor %}
+    <input type="submit" value="Подписаться на категории">
+
+
+</form>
+
+
+
+{% endblock content %} 
