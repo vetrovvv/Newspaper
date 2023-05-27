@@ -74,5 +74,10 @@ News
     {{ form }} <!-- Теперь нам нужна только готовая форма и кнопка -->
     <input type="submit" name="categ" value="Подписаться на категорию постов">
 </form>
+<form method="POST" action="{% url 'become_subscriber' %}">
+    {% csrf_token %} 
+    {{ form }} <!-- Теперь нам нужна только готовая форма и кнопка -->
+    <input type="submit" name="categ" value="Подписаться на категорию постов">
+</form>
     
 {% endblock content %}

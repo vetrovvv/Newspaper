@@ -7,6 +7,9 @@ from datetime import *
 from django.db.models.signals import (
 post_save
 )
+from django.core.cache import cache
+
+
 saver = []   # List of dictionaries that gets the rating of all comments on the author's posts and is cleared when getCommentsOfAuthorPosts completes
 try:
     del saver[0]
@@ -94,6 +97,10 @@ class Post(models.Model):
     def dislike(self):
         self.post_rate -= 1
         self.save()
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)  # сначала вызываем метод родителя, чтобы объект сохранился
+        cache.delete(f'post-{self.pk}')  # затем удаляем его из кэша, чтобы сбросить его
 
 
 class PostCategory(models.Model):

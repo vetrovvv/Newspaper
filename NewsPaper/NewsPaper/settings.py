@@ -14,6 +14,9 @@ from pathlib import Path
 import os
 
 from dotenv import load_dotenv, find_dotenv
+import logging
+
+
 from django.conf.global_settings import DATETIME_INPUT_FORMATS
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 load_dotenv(find_dotenv())
@@ -98,7 +101,6 @@ DATABASES = {
     }
 }
 
-
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
@@ -116,6 +118,13 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+        'LOCATION': os.path.join(BASE_DIR, 'cache_files'), # Указываем, куда будем сохранять кэшируемые файлы! Не забываем создать папку cache_files внутри папки с manage.py!
+    }
+}
+2
 
 
 # Internationalization
@@ -128,7 +137,6 @@ TIME_ZONE = 'Europe/Moscow'
 USE_I18N = True
 USE_L10N = False
 USE_TZ = False
-
 
 
 
@@ -169,7 +177,124 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")
 EMAIL_USE_TLS = True
+ADMINS = [
+    ('Lion', 'holojunk@gmail.com'),
+]
 
 APSCHEDULER_DATETIME_FORMAT = "N j, Y, f:s a"
 APSCHEDULER_RUN_NOW_TIMEOUT = 25
 SITE_URL = 'http://127.0.0.1:8000'
+DEBUG=False
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'debug': {
+            'format': '%(asctime)s %(levelname)s %(message)s'
+        },
+        'warning': {
+            'format': '%(asctime)s %(levelname)s %(message)s %(pathname)s'
+        },
+        'error': {
+            'format': '%(asctime)s %(levelname)s %(message)s %(pathname)s %(exc_info)s'
+        },
+        'infofile': {
+            'format': '%(asctime)s %(levelname)s %(module)s %(message)s'
+        },
+        'mail': {
+            'format': '%(asctime)s %(levelname)s %(message)s %(pathname)s'
+        }
+    },
+    'filters': {
+        'require_debug_true': {
+            '()': 'django.utils.log.RequireDebugTrue',
+        },
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse',
+        },
+    },
+    'handlers': {
+        'debug': {
+            'level': 'DEBUG',
+            'filters': ['require_debug_true'],
+            'class': 'logging.StreamHandler',
+            'formatter': 'debug'
+        },
+        'warning': {
+            'level': 'WARNING',
+            'filters': ['require_debug_true'],
+            'class': 'logging.StreamHandler',
+            'formatter': 'warning'
+        },
+        'error': {
+            'level': 'ERROR',
+            'filters': ['require_debug_true'],
+            'class': 'logging.StreamHandler',
+            'formatter': 'error'
+        },
+
+        'infofile': {
+            'level': 'INFO',
+            'class': 'logging.FileHandler',
+            'filters': ['require_debug_false'],
+            'formatter': 'infofile',
+            'filename': 'general.log'
+        },
+        'errorfile': {
+            'level': 'ERROR',
+            'class': 'logging.FileHandler',
+            'formatter': 'error',
+            'filename': 'errors.log'
+        },
+        'securityfile': {
+            'level': 'INFO',
+            'class': 'logging.FileHandler',
+            'formatter': 'infofile',
+            'filename': 'security.log'
+        },
+        'mail_admins': {
+            'level': 'ERROR',
+            'filters': ['require_debug_false'],
+            'class': 'django.utils.log.AdminEmailHandler',
+            'formatter': 'mail',
+        }
+
+    },
+    'loggers': {
+        'django': {
+            'level': 'INFO',
+            'handlers': ['infofile','error'],
+            'propagate': True,
+        },
+        'django.request': {
+            'level': 'ERROR',
+            'handlers': ['errorfile','mail_admins'],
+            'propagate': False,
+        },
+        'django.server': {
+            'level': 'ERROR',
+            'handlers': ['errorfile','mail_admins'],
+            'propagate': False,
+        },
+
+        'django.template': {
+            'level': 'ERROR',
+            'handlers': ['errorfile'],
+            'propagate': False,
+        },
+        'django.db_backends': {
+            'level': 'ERROR',
+            'handlers': ['errorfile'],
+            'propagate': False,
+        },
+        'django.security': {
+            'level': 'INFO',
+            'handlers': ['securityfile'],
+            'propagate': False,
+        },
+
+
+
+    }
+}

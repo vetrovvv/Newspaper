@@ -16,6 +16,9 @@ from datetime import datetime,timedelta
 from django.utils import timezone
 from django.template.loader import render_to_string
 from NewsPaper import settings
+from django.views.decorators.cache import cache_page
+from django.core.cache import cache
+
 class PostList(ListView):
 
     model = Post
@@ -138,6 +141,13 @@ class PostDetail(DetailView):
         context[
             'value1'] = self.object.post_author
         return context
+
+    def get_object(self,*args,**kwargs):
+        obj = cache.get(f'post-{self.kwargs["pk"]}', None)
+        if not obj:
+            obj = super().get_object(queryset=self.queryset)
+            cache.set(f'post-{self.kwargs["pk"]}', obj)
+        return obj
 
 
 

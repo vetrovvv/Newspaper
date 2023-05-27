@@ -1,0 +1,200 @@
+2023-05-27 15:34:56,849 ERROR Internal Server Error: /news/ /home/vitalii/PycharmProjects/pythonProject11/venv/lib/python3.10/site-packages/django/utils/log.py (<class 'django.template.exceptions.TemplateSyntaxError'>, TemplateSyntaxError("Unclosed tag on line 59: 'block'. Looking for one of: endblock."), <traceback object at 0x7f8b05476fc0>)
+Traceback (most recent call last):
+  File "/home/vitalii/PycharmProjects/pythonProject11/venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/vitalii/PycharmProjects/pythonProject11/venv/lib/python3.10/site-packages/django/core/handlers/base.py", line 220, in _get_response
+    response = response.render()
+  File "/home/vitalii/PycharmProjects/pythonProject11/venv/lib/python3.10/site-packages/django/template/response.py", line 111, in render
+    self.content = self.rendered_content
+  File "/home/vitalii/PycharmProjects/pythonProject11/venv/lib/python3.10/site-packages/django/template/response.py", line 89, in rendered_content
+    return template.render(context, self._request)
+  File "/home/vitalii/PycharmProjects/pythonProject11/venv/lib/python3.10/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+  File "/home/vitalii/PycharmProjects/pythonProject11/venv/lib/python3.10/site-packages/django/template/base.py", line 175, in render
+    return self._render(context)
+  File "/home/vitalii/PycharmProjects/pythonProject11/venv/lib/python3.10/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/home/vitalii/PycharmProjects/pythonProject11/venv/lib/python3.10/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/vitalii/PycharmProjects/pythonProject11/venv/lib/python3.10/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/vitalii/PycharmProjects/pythonProject11/venv/lib/python3.10/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/home/vitalii/PycharmProjects/pythonProject11/venv/lib/python3.10/site-packages/django/template/loader_tags.py", line 132, in render
+    compiled_parent = self.get_parent(context)
+  File "/home/vitalii/PycharmProjects/pythonProject11/venv/lib/python3.10/site-packages/django/template/loader_tags.py", line 129, in get_parent
+    return self.find_template(parent, context)
+  File "/home/vitalii/PycharmProjects/pythonProject11/venv/lib/python3.10/site-packages/django/template/loader_tags.py", line 107, in find_template
+    template, origin = context.template.engine.find_template(
+  File "/home/vitalii/PycharmProjects/pythonProject11/venv/lib/python3.10/site-packages/django/template/engine.py", line 157, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "/home/vitalii/PycharmProjects/pythonProject11/venv/lib/python3.10/site-packages/django/template/loaders/cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "/home/vitalii/PycharmProjects/pythonProject11/venv/lib/python3.10/site-packages/django/template/loaders/base.py", line 28, in get_template
+    return Template(
+  File "/home/vitalii/PycharmProjects/pythonProject11/venv/lib/python3.10/site-packages/django/template/base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "/home/vitalii/PycharmProjects/pythonProject11/venv/lib/python3.10/site-packages/django/template/base.py", line 200, in compile_nodelist
+    return parser.parse()
+  File "/home/vitalii/PycharmProjects/pythonProject11/venv/lib/python3.10/site-packages/django/template/base.py", line 513, in parse
+    raise self.error(token, e)
+  File "/home/vitalii/PycharmProjects/pythonProject11/venv/lib/python3.10/site-packages/django/template/base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "/home/vitalii/PycharmProjects/pythonProject11/venv/lib/python3.10/site-packages/django/template/loader_tags.py", line 232, in do_block
+    nodelist = parser.parse(("endblock",))
+  File "/home/vitalii/PycharmProjects/pythonProject11/venv/lib/python3.10/site-packages/django/template/base.py", line 518, in parse
+    self.unclosed_block_tag(parse_until)
+  File "/home/vitalii/PycharmProjects/pythonProject11/venv/lib/python3.10/site-packages/django/template/base.py", line 581, in unclosed_block_tag
+    raise self.error(token, msg)
+django.template.exceptions.TemplateSyntaxError: Unclosed tag on line 59: 'block'. Looking for one of: endblock.
+2023-05-27 15:34:57,032 ERROR "GET /news/ HTTP/1.1" 500 145 /home/vitalii/PycharmProjects/pythonProject11/venv/lib/python3.10/site-packages/django/core/servers/basehttp.py None
+2023-05-27 15:35:02,780 ERROR Internal Server Error: /news/ /home/vitalii/PycharmProjects/pythonProject11/venv/lib/python3.10/site-packages/django/utils/log.py (<class 'django.template.exceptions.TemplateSyntaxError'>, TemplateSyntaxError("Unclosed tag on line 59: 'block'. Looking for one of: endblock."), <traceback object at 0x7f8b05315b00>)
+Traceback (most recent call last):
+  File "/home/vitalii/PycharmProjects/pythonProject11/venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/vitalii/PycharmProjects/pythonProject11/venv/lib/python3.10/site-packages/django/core/handlers/base.py", line 220, in _get_response
+    response = response.render()
+  File "/home/vitalii/PycharmProjects/pythonProject11/venv/lib/python3.10/site-packages/django/template/response.py", line 111, in render
+    self.content = self.rendered_content
+  File "/home/vitalii/PycharmProjects/pythonProject11/venv/lib/python3.10/site-packages/django/template/response.py", line 89, in rendered_content
+    return template.render(context, self._request)
+  File "/home/vitalii/PycharmProjects/pythonProject11/venv/lib/python3.10/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+  File "/home/vitalii/PycharmProjects/pythonProject11/venv/lib/python3.10/site-packages/django/template/base.py", line 175, in render
+    return self._render(context)
+  File "/home/vitalii/PycharmProjects/pythonProject11/venv/lib/python3.10/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/home/vitalii/PycharmProjects/pythonProject11/venv/lib/python3.10/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/vitalii/PycharmProjects/pythonProject11/venv/lib/python3.10/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/vitalii/PycharmProjects/pythonProject11/venv/lib/python3.10/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/home/vitalii/PycharmProjects/pythonProject11/venv/lib/python3.10/site-packages/django/template/loader_tags.py", line 132, in render
+    compiled_parent = self.get_parent(context)
+  File "/home/vitalii/PycharmProjects/pythonProject11/venv/lib/python3.10/site-packages/django/template/loader_tags.py", line 129, in get_parent
+    return self.find_template(parent, context)
+  File "/home/vitalii/PycharmProjects/pythonProject11/venv/lib/python3.10/site-packages/django/template/loader_tags.py", line 107, in find_template
+    template, origin = context.template.engine.find_template(
+  File "/home/vitalii/PycharmProjects/pythonProject11/venv/lib/python3.10/site-packages/django/template/engine.py", line 157, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "/home/vitalii/PycharmProjects/pythonProject11/venv/lib/python3.10/site-packages/django/template/loaders/cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "/home/vitalii/PycharmProjects/pythonProject11/venv/lib/python3.10/site-packages/django/template/loaders/base.py", line 28, in get_template
+    return Template(
+  File "/home/vitalii/PycharmProjects/pythonProject11/venv/lib/python3.10/site-packages/django/template/base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "/home/vitalii/PycharmProjects/pythonProject11/venv/lib/python3.10/site-packages/django/template/base.py", line 200, in compile_nodelist
+    return parser.parse()
+  File "/home/vitalii/PycharmProjects/pythonProject11/venv/lib/python3.10/site-packages/django/template/base.py", line 513, in parse
+    raise self.error(token, e)
+  File "/home/vitalii/PycharmProjects/pythonProject11/venv/lib/python3.10/site-packages/django/template/base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "/home/vitalii/PycharmProjects/pythonProject11/venv/lib/python3.10/site-packages/django/template/loader_tags.py", line 232, in do_block
+    nodelist = parser.parse(("endblock",))
+  File "/home/vitalii/PycharmProjects/pythonProject11/venv/lib/python3.10/site-packages/django/template/base.py", line 518, in parse
+    self.unclosed_block_tag(parse_until)
+  File "/home/vitalii/PycharmProjects/pythonProject11/venv/lib/python3.10/site-packages/django/template/base.py", line 581, in unclosed_block_tag
+    raise self.error(token, msg)
+django.template.exceptions.TemplateSyntaxError: Unclosed tag on line 59: 'block'. Looking for one of: endblock.
+2023-05-27 15:35:02,967 ERROR "GET /news/ HTTP/1.1" 500 145 /home/vitalii/PycharmProjects/pythonProject11/venv/lib/python3.10/site-packages/django/core/servers/basehttp.py None
+2023-05-27 15:46:41,718 ERROR Internal Server Error: /news/ /home/vitalii/PycharmProjects/pythonProject11/venv/lib/python3.10/site-packages/django/utils/log.py (<class 'django.template.exceptions.TemplateSyntaxError'>, TemplateSyntaxError("Unclosed tag on line 59: 'block'. Looking for one of: endblock."), <traceback object at 0x7fd2665af140>)
+Traceback (most recent call last):
+  File "/home/vitalii/PycharmProjects/pythonProject11/venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/vitalii/PycharmProjects/pythonProject11/venv/lib/python3.10/site-packages/django/core/handlers/base.py", line 220, in _get_response
+    response = response.render()
+  File "/home/vitalii/PycharmProjects/pythonProject11/venv/lib/python3.10/site-packages/django/template/response.py", line 111, in render
+    self.content = self.rendered_content
+  File "/home/vitalii/PycharmProjects/pythonProject11/venv/lib/python3.10/site-packages/django/template/response.py", line 89, in rendered_content
+    return template.render(context, self._request)
+  File "/home/vitalii/PycharmProjects/pythonProject11/venv/lib/python3.10/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+  File "/home/vitalii/PycharmProjects/pythonProject11/venv/lib/python3.10/site-packages/django/template/base.py", line 175, in render
+    return self._render(context)
+  File "/home/vitalii/PycharmProjects/pythonProject11/venv/lib/python3.10/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/home/vitalii/PycharmProjects/pythonProject11/venv/lib/python3.10/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/vitalii/PycharmProjects/pythonProject11/venv/lib/python3.10/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/vitalii/PycharmProjects/pythonProject11/venv/lib/python3.10/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/home/vitalii/PycharmProjects/pythonProject11/venv/lib/python3.10/site-packages/django/template/loader_tags.py", line 132, in render
+    compiled_parent = self.get_parent(context)
+  File "/home/vitalii/PycharmProjects/pythonProject11/venv/lib/python3.10/site-packages/django/template/loader_tags.py", line 129, in get_parent
+    return self.find_template(parent, context)
+  File "/home/vitalii/PycharmProjects/pythonProject11/venv/lib/python3.10/site-packages/django/template/loader_tags.py", line 107, in find_template
+    template, origin = context.template.engine.find_template(
+  File "/home/vitalii/PycharmProjects/pythonProject11/venv/lib/python3.10/site-packages/django/template/engine.py", line 157, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "/home/vitalii/PycharmProjects/pythonProject11/venv/lib/python3.10/site-packages/django/template/loaders/cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "/home/vitalii/PycharmProjects/pythonProject11/venv/lib/python3.10/site-packages/django/template/loaders/base.py", line 28, in get_template
+    return Template(
+  File "/home/vitalii/PycharmProjects/pythonProject11/venv/lib/python3.10/site-packages/django/template/base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "/home/vitalii/PycharmProjects/pythonProject11/venv/lib/python3.10/site-packages/django/template/base.py", line 200, in compile_nodelist
+    return parser.parse()
+  File "/home/vitalii/PycharmProjects/pythonProject11/venv/lib/python3.10/site-packages/django/template/base.py", line 513, in parse
+    raise self.error(token, e)
+  File "/home/vitalii/PycharmProjects/pythonProject11/venv/lib/python3.10/site-packages/django/template/base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "/home/vitalii/PycharmProjects/pythonProject11/venv/lib/python3.10/site-packages/django/template/loader_tags.py", line 232, in do_block
+    nodelist = parser.parse(("endblock",))
+  File "/home/vitalii/PycharmProjects/pythonProject11/venv/lib/python3.10/site-packages/django/template/base.py", line 518, in parse
+    self.unclosed_block_tag(parse_until)
+  File "/home/vitalii/PycharmProjects/pythonProject11/venv/lib/python3.10/site-packages/django/template/base.py", line 581, in unclosed_block_tag
+    raise self.error(token, msg)
+django.template.exceptions.TemplateSyntaxError: Unclosed tag on line 59: 'block'. Looking for one of: endblock.
+2023-05-27 15:46:43,817 ERROR "GET /news/ HTTP/1.1" 500 145 /home/vitalii/PycharmProjects/pythonProject11/venv/lib/python3.10/site-packages/django/core/servers/basehttp.py None
+2023-05-27 16:06:49,255 ERROR Internal Server Error: /news/ /home/vitalii/PycharmProjects/pythonProject11/venv/lib/python3.10/site-packages/django/utils/log.py (<class 'django.template.exceptions.TemplateSyntaxError'>, TemplateSyntaxError("Unclosed tag on line 59: 'block'. Looking for one of: endblock."), <traceback object at 0x7f892c54f1c0>)
+Traceback (most recent call last):
+  File "/home/vitalii/PycharmProjects/pythonProject11/venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/vitalii/PycharmProjects/pythonProject11/venv/lib/python3.10/site-packages/django/core/handlers/base.py", line 220, in _get_response
+    response = response.render()
+  File "/home/vitalii/PycharmProjects/pythonProject11/venv/lib/python3.10/site-packages/django/template/response.py", line 111, in render
+    self.content = self.rendered_content
+  File "/home/vitalii/PycharmProjects/pythonProject11/venv/lib/python3.10/site-packages/django/template/response.py", line 89, in rendered_content
+    return template.render(context, self._request)
+  File "/home/vitalii/PycharmProjects/pythonProject11/venv/lib/python3.10/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+  File "/home/vitalii/PycharmProjects/pythonProject11/venv/lib/python3.10/site-packages/django/template/base.py", line 175, in render
+    return self._render(context)
+  File "/home/vitalii/PycharmProjects/pythonProject11/venv/lib/python3.10/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/home/vitalii/PycharmProjects/pythonProject11/venv/lib/python3.10/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/vitalii/PycharmProjects/pythonProject11/venv/lib/python3.10/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/vitalii/PycharmProjects/pythonProject11/venv/lib/python3.10/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/home/vitalii/PycharmProjects/pythonProject11/venv/lib/python3.10/site-packages/django/template/loader_tags.py", line 132, in render
+    compiled_parent = self.get_parent(context)
+  File "/home/vitalii/PycharmProjects/pythonProject11/venv/lib/python3.10/site-packages/django/template/loader_tags.py", line 129, in get_parent
+    return self.find_template(parent, context)
+  File "/home/vitalii/PycharmProjects/pythonProject11/venv/lib/python3.10/site-packages/django/template/loader_tags.py", line 107, in find_template
+    template, origin = context.template.engine.find_template(
+  File "/home/vitalii/PycharmProjects/pythonProject11/venv/lib/python3.10/site-packages/django/template/engine.py", line 157, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "/home/vitalii/PycharmProjects/pythonProject11/venv/lib/python3.10/site-packages/django/template/loaders/cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "/home/vitalii/PycharmProjects/pythonProject11/venv/lib/python3.10/site-packages/django/template/loaders/base.py", line 28, in get_template
+    return Template(
+  File "/home/vitalii/PycharmProjects/pythonProject11/venv/lib/python3.10/site-packages/django/template/base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "/home/vitalii/PycharmProjects/pythonProject11/venv/lib/python3.10/site-packages/django/template/base.py", line 200, in compile_nodelist
+    return parser.parse()
+  File "/home/vitalii/PycharmProjects/pythonProject11/venv/lib/python3.10/site-packages/django/template/base.py", line 513, in parse
+    raise self.error(token, e)
+  File "/home/vitalii/PycharmProjects/pythonProject11/venv/lib/python3.10/site-packages/django/template/base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "/home/vitalii/PycharmProjects/pythonProject11/venv/lib/python3.10/site-packages/django/template/loader_tags.py", line 232, in do_block
+    nodelist = parser.parse(("endblock",))
+  File "/home/vitalii/PycharmProjects/pythonProject11/venv/lib/python3.10/site-packages/django/template/base.py", line 518, in parse
+    self.unclosed_block_tag(parse_until)
+  File "/home/vitalii/PycharmProjects/pythonProject11/venv/lib/python3.10/site-packages/django/template/base.py", line 581, in unclosed_block_tag
+    raise self.error(token, msg)
+django.template.exceptions.TemplateSyntaxError: Unclosed tag on line 59: 'block'. Looking for one of: endblock.
+2023-05-27 16:06:50,990 ERROR "GET /news/ HTTP/1.1" 500 145 /home/vitalii/PycharmProjects/pythonProject11/venv/lib/python3.10/site-packages/django/core/servers/basehttp.py None

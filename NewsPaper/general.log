@@ -1,0 +1,7 @@
+2023-05-27 15:33:39,401 INFO autoreload Watching for file changes with StatReloader
+2023-05-27 15:39:00,991 INFO autoreload /home/vitalii/pythonProject11/NewsPaper/NewsPaper/settings.py changed, reloading.
+2023-05-27 15:39:18,242 INFO autoreload Watching for file changes with StatReloader
+2023-05-27 15:39:31,880 INFO autoreload /home/vitalii/pythonProject11/NewsPaper/NewsPaper/settings.py changed, reloading.
+2023-05-27 15:46:10,881 INFO autoreload Watching for file changes with StatReloader
+2023-05-27 15:47:35,457 INFO autoreload /home/vitalii/pythonProject11/NewsPaper/NewsPaper/settings.py changed, reloading.
+2023-05-27 16:06:45,662 INFO autoreload Watching for file changes with StatReloader
